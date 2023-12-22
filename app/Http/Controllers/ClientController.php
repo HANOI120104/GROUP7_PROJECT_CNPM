@@ -546,4 +546,19 @@ class ClientController extends Controller
     
     
         }
+        public function buynow(Request $request){
+            \Cart::clear();
+            \Cart::add([
+                'id' => $request->id,
+                'name' => $request->ProductName,
+                'price' => $request->Price,
+                'quantity' => $request->quantity,
+                'attributes' => [
+                    'url' => $request->URL,
+                    'size' => $request->size,
+                ],
+            ]);
+
+            return redirect()->route('show.thanhtoan');
+        }
 }
