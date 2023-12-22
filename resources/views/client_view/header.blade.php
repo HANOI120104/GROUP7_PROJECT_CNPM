@@ -38,19 +38,19 @@
                             <nav class="navbar navbar-expand-lg">
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <a href="" style="margin: 0; padding: 0;">SNEAKER</a>
+                                        <a href="{{ route('category', ['category' => '1']) }}" style="margin: 0; padding: 0;">SNEAKER</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" style="margin: 0; padding: 0;">SLIDE</a>
+                                        <a href="{{ route('category', ['category' => '2']) }}" style="margin: 0; padding: 0;">SLIDE</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" style="margin: 0; padding: 0;">BAG-CLOTHING</a>
+                                        <a href="{{ route('category', ['category' => '3']) }}" style="margin: 0; padding: 0;">BAG-CLOTHING</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" style="margin: 0; padding: 0;">ACCESSORIES</a>
+                                        <a href="{{ route('category', ['category' => '4']) }}" style="margin: 0; padding: 0;">ACCESSORIES</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" style="margin: 0;">LIÊN HỆ</a>
+                                        <a href="{{route('contact')}}" style="margin: 0;">LIÊN HỆ</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -69,7 +69,7 @@
                                 </a>
                             </div>
                             <div class="action--cart col-3">
-                                <a href="" >
+                                <a href="{{route('show.cart')}}" >
                                     <i class="fa-solid fa-cart-plus"><span class="count"></span></i>
                                 </a>
                             </div>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="form-search">
-                    <form action="" method="POST">
+                    <form action="{{ route('product.search') }}" method="POST">
                         @csrf
                         <input type="text" name="keyword"  placeholder="Tìm kiếm sản phẩm">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>

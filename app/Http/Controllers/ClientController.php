@@ -144,4 +144,252 @@ class ClientController extends Controller
     public function static(){
         return view('client_view/static01');
     }
+    public function HomePage()
+    {
+        // Lấy danh sách sản phẩm từ bảng "Product"
+        $sneakers = Product::where('category_id', 1)
+                            ->whereHas('sizes', function ($query) {
+                                $query->where('Quantity', '>', 0);
+                            })      
+                          ->where('ProductStatus', 1)
+                          ->inRandomOrder()
+                          ->take(8)
+                          ->get();
+    
+        // Tạo một mảng để chứa thông tin sản phẩm và hình ảnh tương ứng
+        $sneakersWithImages = [];
+    
+        // Duyệt qua danh sách sản phẩm
+        foreach ($sneakers as $sneaker) {
+            // Lấy hình ảnh của sản phẩm từ bảng "Image" dựa vào trường "product_id"
+            $images1 = Image::where('product_id', $sneaker->id)->take(2)->pluck('url');
+            $size1 = Size::where('product_id', $sneaker->id)->pluck('SizeName')->first();
+            // Thêm thông tin sản phẩm và hình ảnh vào mảng
+            $sneakersWithImages[] = [
+                'sneaker' => $sneaker,
+                'image1' => $images1[0],
+                'image2' => $images1[1],
+                'size' => $size1,
+            ];
+        }
+
+        $slides = Product::where('category_id', 2)
+        ->whereHas('sizes', function ($query) {
+            $query->where('Quantity', '>', 0);
+        })    
+        ->where('ProductStatus', 1)
+        ->inRandomOrder()
+        ->take(8)
+        ->get();
+        $slidesWithImages = [];
+
+
+        foreach ($slides as $slide) {
+
+            $images2 = Image::where('product_id', $slide->id)->take(2)->pluck('url');
+            $size2 = Size::where('product_id', $slide->id)->pluck('SizeName')->first();
+            $slidesWithImages[] = [
+            'slide' => $slide,
+            'image1' => $images2[0],
+            'image2' => $images2[1],
+            'size' => $size2,
+            ];
+        }
+        $bags = Product::where('category_id', 3)
+        ->whereHas('sizes', function ($query) {
+            $query->where('Quantity', '>', 0);
+        })    
+        ->where('ProductStatus', 1)
+        ->inRandomOrder()
+        ->take(8)
+        ->get();
+        $bagsWithImages = [];
+
+
+        foreach ($bags as $bag) {
+
+            $images3 = Image::where('product_id', $bag->id)->take(2)->pluck('url');
+            $size3 = Size::where('product_id', $bag->id)->pluck('SizeName')->first();
+            $bagsWithImages[] = [
+            'bag' => $bag,
+            'image1' => $images3[0],
+            'image2' => $images3[1],
+            'size' => $size3,
+            ];
+        }
+        // Trả về view "homepage" và truyền mảng chứa thông tin sản phẩm và hình ảnh
+        return view('client_view/homepage', compact('sneakersWithImages','slidesWithImages','bagsWithImages'));
+    }
+    public function Category(Request $request){
+        $category = Category::where('id',$request->query('category'))->first(); // Truy vấn để lấy thông tin của loại
+        $brands = Brand::where('category_id', $request->query('category'))->where('BraStatus', 1)->get();
+        $products = Product::where('category_id', $request->query('category'))
+        ->whereHas('sizes', function ($query) {
+            $query->where('Quantity', '>', 0);
+        })    
+        ->where('ProductStatus', 1)
+        ->get();
+        $productsWithImages = [];
+
+
+        foreach ($products as $product) {
+
+            $images = Image::where('product_id', $product->id)->take(2)->pluck('url');
+            $size = Size::where('product_id', $product->id)->pluck('SizeName')->first();;
+            $productsWithImages[] = [
+            'product' => $product,
+            'image1' => $images[0],
+            'image2' => $images[1],
+            'size'=>$size,
+            ];
+        }
+        return view('client_view/product_category', compact('productsWithImages','brands','category'));
+    }
+    public function filterProducts(Request $request)
+    {
+        $selectedBrands = $request->input('brands', []);
+        $priceRanges = $request->input('priceRanges', []);
+        $category = $request->query('category');
+
+        $query = Product::query();
+
+        // Trường hợp 1: Áp dụng bộ lọc chỉ theo thương hiệu
+        if (!empty($selectedBrands) && empty($priceRanges)) {
+            $query->whereIn('brand_id', $selectedBrands);
+        }
+
+        // Trường hợp 2: Áp dụng bộ lọc chỉ theo khoảng giá
+        if (empty($selectedBrands) && !empty($priceRanges)) {
+            foreach ($priceRanges as $priceRange) {
+            if ($priceRange === 'under-1000000') {
+                $query->orWhere('price', '<', 1000000);
+            } elseif ($priceRange === '1000000-2000000') {
+                $query->orWhereBetween('price', [1000000, 2000000]);
+            } elseif ($priceRange === '2000000-3000000') {
+                $query->orWhereBetween('price', [2000000, 3000000]);
+            } elseif ($priceRange === '3000000-5000000') {
+                $query->orWhereBetween('price', [3000000, 5000000]);
+            } elseif ($priceRange === 'over-5000000') {
+                $query->orWhere('price', '>', 5000000);
+            }
+            $query->where('category_id', $category);
+        }
+        if ($category !== null) {
+            
+            $query->where('category_id', $category);
+        }
+        }
+
+        // Trường hợp 3: Áp dụng bộ lọc cả theo thương hiệu và khoảng giá
+        if (!empty($selectedBrands) && !empty($priceRanges)) {
+            $query->whereIn('brand_id', $selectedBrands);
+
+            $query->where(function ($query) use ($priceRanges) {
+                foreach ($priceRanges as $priceRange) {
+                    if ($priceRange === 'under-1000000') {
+                        $query->orWhere('price', '<', 1000000);
+                    } elseif ($priceRange === '1000000-2000000') {
+                        $query->orWhereBetween('price', [1000000, 2000000]);
+                    } elseif ($priceRange === '2000000-3000000') {
+                        $query->orWhereBetween('price', [2000000, 3000000]);
+                    } elseif ($priceRange === '3000000-5000000') {
+                        $query->orWhereBetween('price', [3000000, 5000000]);
+                    } elseif ($priceRange === 'over-5000000') {
+                        $query->orWhere('price', '>', 5000000);
+                    }
+                }
+            });
+        }
+
+        // Trường hợp 4: Không áp dụng bộ lọc thương hiệu và giá, chỉ lọc theo category
+        if (empty($selectedBrands) && empty($priceRanges)) {
+            $query->where('category_id', $category);
+        }
+        $query->whereHas('sizes', function ($query) {
+            $query->where('Quantity', '>', 0);
+        }, '>', 0);
+        // Lấy danh sách sản phẩm sau khi lọc
+        $filteredProducts = $query->get();
+
+        // Chuẩn bị dữ liệu cho phản hồi JSON kèm hình ảnh sản phẩm
+        $productsWithImages = [];
+        foreach ($filteredProducts as $product) {
+            $images = Image::where('product_id', $product->id)
+                            ->take(2)
+                            ->pluck('url');
+            $size = Size::where('product_id', $product->id)->pluck('SizeName')->first();
+            $productData = [
+                'product' => $product,
+                'image1' => $images[0],
+                'image2' => $images[1],
+                'size' => $size,
+            ];
+            $productsWithImages[] = $productData;
+        }
+
+        // Trả về danh sách sản phẩm đã lọc dưới dạng phản hồi JSON
+        return response()->json(['products' => $productsWithImages]);
+    }
+
+    public function detailProduct(Request $request){
+        $product = Product::where('id', $request->query('id'))
+        ->where('ProductStatus', 1)
+        ->first();
+
+        $images = Image::where('product_id', $product->id)->pluck('url');
+        $sizes = Size::where('product_id', $product->id)
+        ->where('Quantity', '>', 0) // Chỉ lấy kích thước có Quantity > 0
+        ->get();
+        $otherProducts =Product::where('brand_id', $product->brand_id)
+        ->where('ProductStatus', 1)
+        ->whereHas('sizes', function ($query) {
+            $query->where('Quantity', '>', 0);
+        })
+        ->inRandomOrder()
+        ->take(8)
+        ->get();
+        $productsWithImages = [];
+        foreach ($otherProducts as $otherProduct) {
+            $images1 = Image::where('product_id', $otherProduct->id)
+                            ->take(2)
+                            ->pluck('url');
+            $size = Size::where('product_id', $otherProduct->id)->pluck('SizeName')->first();
+            $productData = [
+                'size' => $size, 
+                'otherProduct' => $otherProduct,
+                'image1' => $images1[0],
+                'image2' => $images1[1],
+            ];
+            $productsWithImages[] = $productData;
+        }
+
+        return view('client_view/product_detail', compact('product','images','sizes','productsWithImages'));
+        }
+        
+
+        public function search(Request $request){
+            $keyword = $request->input('keyword');
+            $products = Product::where('ProductName', 'like', '%' . $keyword . '%')
+                                ->where('ProductStatus', 1)
+                                ->whereHas('sizes', function ($query) {
+                                    $query->where('Quantity', '>', 0);
+                                })
+                                ->get();
+            $count = count($products);
+            $productsWithImages = [];
+            foreach ($products as $product) {
+                $images = Image::where('product_id', $product->id)
+                                ->take(2)
+                                ->pluck('url');
+                $size = Size::where('product_id', $product->id)->pluck('SizeName')->first();
+                $productData = [
+                    'size' => $size,
+                    'product' => $product,
+                    'image1' => $images[0],
+                    'image2' => $images[1],
+                ];
+                $productsWithImages[] = $productData;
+            }
+            return view('client_view/search', compact('productsWithImages','count','keyword'));
+        }
 }

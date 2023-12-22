@@ -25,10 +25,10 @@
             <div class="sec quickLinks">
                 <h2>Mục lục</h2>
                 <ul style="padding-left: 0;">
-                    <li> <a href="">Sneaker</a></li>
-                    <li> <a href="">Slide</a></li>
-                    <li> <a href="">Bag-Clothing</a></li>
-                    <li> <a href="">Accessories</a></li>
+                    <li> <a href="{{ route('category', ['category' => '1']) }}">Sneaker</a></li>
+                    <li> <a href="{{ route('category', ['category' => '2']) }}">Slide</a></li>
+                    <li> <a href="{{ route('category', ['category' => '3']) }}">Bag-Clothing</a></li>
+                    <li> <a href="{{ route('category', ['category' => '4']) }}">Accessories</a></li>
                 </ul>
             </div>
             <div class="sec contact">

@@ -13,9 +13,7 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/customer-login', [ClientController::class, 'showCustomerLogin'])->name('show.customer.login');
 Route::post('/customer-login', [ClientController::class, 'CustomerLogin'])->name('customer.login');
 Route::post('/customer-logout', [ClientController::class, 'CustomerLogout'])->name('customer.logout');
@@ -26,3 +24,13 @@ Route::get('/customer-register', [ClientController::class, 'showCustomerRegister
 Route::post('/customer-register', [ClientController::class, 'CustomerRegister'])->name('customer.register');
 Route::get('/contact', [ClientController::class, 'contact'])->name('contact');
 Route::get('/statc', [ClientController::class, 'static'])->name('static');
+
+
+
+Route::get('/', [ClientController::class, 'HomePage'])->name('homepage');
+Route::get('/category', [ClientController::class, 'Category'])->name('category');
+Route::get('/filter-products', [ClientController::class, 'filterProducts'])->name('filter.products');
+Route::get('/product-detail',[ClientController::class, 'detailProduct'])->name('detail.product');
+Route::get('/search', [ClientController::class, 'search'])->name('product.search.result');
+Route::post('/search', [ClientController::class, 'search'])->name('product.search');
+
