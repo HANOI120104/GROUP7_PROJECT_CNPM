@@ -1,0 +1,335 @@
+*{
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+}
+.notify{
+    margin-top: 20px;
+    text-align: center;
+}
+.notify p{
+    color: #ede917;
+    font-weight: bold;
+    font-size: 20px;
+}
+#sidebar-toggle{
+    display: none;
+}
+#sidebar-toggle:checked ~ .sidebar{
+    left: -100%;
+}
+#sidebar-toggle:checked ~ .main-content header{
+    left: 0;
+    width: 100%;
+    right: 0;
+}
+#sidebar-toggle:checked ~ .main-content{
+    margin-left: 0;
+}
+.body-label{
+    position: fixed;
+    height: 100%;
+    width: calc(100% - 280px);
+    z-index: 30;
+    right: -100%;
+    top: 0;
+}
+
+.sidebar{
+    width: 280px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #338dbc;
+    color: #fff;
+    z-index: 20;
+    transition: left 300ms;
+}
+.sidebar-brand{
+    height: 70px;
+    padding: 1rem 1.5rem;
+
+
+}
+.brand-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.brand-icons span{
+    font-size: 1.5rem;
+    margin-left: .5rem;
+}
+.sidebar-user{
+    margin:3rem 0rem 1rem 0rem;
+    text-align: center;
+}
+.sidebar-user img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+.sidebar-user h3{
+    font-size: 1rem;
+}
+.sidebar-user span{
+    font-size: 0.8rem;
+}
+.sidebar-menu{
+    margin-top: 2rem;
+}
+.sidebar-menu ul{
+    margin-top: 1.5rem;
+}
+.sidebar-menu li{
+    margin-bottom: 1.2rem;
+    padding: 20px;
+}
+.sidebar-menu li:hover{
+    background: #052036;
+    cursor: pointer;
+}
+.sidebar-menu li a{
+    color: #efefef;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+.sidebar-menu li a i{
+    font-size: 1rem;
+    display: inline-block;
+    margin-right: 1rem;
+}
+.main-content{
+    margin-left: 280px;
+    transition: margin-left 300ms;
+
+}
+
+header{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    position: fixed;
+    left: 280px;
+    width: calc(100% - 280px);
+    top: 0;
+    z-index: 20;
+    background: #fff;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.menu-toggle label{
+    height: 60px;
+    width: 60px;
+    font-size: 1.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+}
+.header-icons {
+    display: flex;
+}
+.admin-search {
+    border: 1px solid #000;
+    border-radius: 25px;
+    display: flex;
+}
+
+.header-icons span {
+    font-size: 1.5rem;
+    margin: 2px 0;
+    padding: 0 10px 0 0;
+}
+
+.header-icons .inp-search {
+    width: 300px;
+    height: 20px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    margin: 5px 0 5px 8px;
+    padding-left: 18px;
+    transition: 1s all ease;
+}
+
+.header-icons i {
+    padding: 5px 25px;
+    /* text-align: center; */
+    font-size: 22px;
+}
+
+.header-icons i:hover {
+    cursor: pointer;
+}
+.menu-toggle label:hover{
+    background: #efefef;
+}
+main{
+    padding: 1.5rem;
+    background: #f1f5f9;
+    min-height: calc(100vh - 70px);
+    margin-top: 70px;
+}
+@media only screen and (max-width: 1124px){
+    .sidebar{
+        left: -100%;
+        z-index: 30;
+    }
+    .main-content{
+        margin-left: 0;
+    }
+    header{
+        left: 0;
+        width: 100%;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar{
+        left: 0;    
+    }
+
+    #sidebar-toggle:checked ~ .body-label{
+        right: 0;    
+    }
+
+    .cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media only screen and (max-width: 750px){  
+    .cards{
+        grid-template-columns: 100%;
+    }
+    .page-header{
+        display: block;
+    }
+    .header-actions button:first-child{
+        margin-left: 0rem;
+    }
+    .header-actions{
+        margin-top: 1rem;
+        text-align: right;
+    }
+}
+
+.container{
+  max-width: 1500px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+.container .title{
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.content form .user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .cate-op{
+    width: 100%;
+    height: 45px;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-left: 12px;
+    border-bottom-width: 2px;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #42210b;
+}
+form .button{
+   height: 45px;
+   margin: 35px 0
+}
+form .button input{
+   height: 100%;
+   width: 40%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 17px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: #0a8f27;
+}
+form .button input:hover{
+  background: #044d0f;
+}
+.img-link{
+    margin-top: 22px;
+}
+@media(max-width: 584px){
+ .container{
+    max-width: 100%;
+  }
+  form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+    form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
+}
+.user-details .input-box select{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  .user-details .input-box select:focus,
+  .user-details .input-box select:valid{
+    border-color: #42210b;
+  }

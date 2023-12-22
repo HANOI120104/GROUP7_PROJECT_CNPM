@@ -1,0 +1,312 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand';
+}
+.pm-container{
+    padding: 20px;
+    justify-content: center;
+}
+
+.linktopm {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.linktopm ul {
+    list-style-type: none; /* Loại bỏ dấu đầu dòng của danh sách */
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các phần tử li */
+    padding: 0;
+}
+
+.linktopm li:not(:last-child)::after {
+    content: " >";
+    margin: 0 5px; /* Khoảng cách giữa dấu > và các phần tử li */
+    color: gray; /* Màu của dấu > */
+}
+
+.linktopm a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.linktopm a:hover{
+    color: #338dbc;
+}
+.account-ship{
+    display: flex;
+}
+.account-ship p{
+    margin-right: 5px;
+}
+.account-ship a{
+    text-decoration: none;
+    font-weight: 600;
+    color: #338dbc;
+}
+.info-ship-section h4{
+    font-size: 20px;
+}
+.account-ship-logined{
+    display: none;
+}
+.input-name{
+    margin-bottom: 5px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 5px 10px;
+    /* position: relative; */
+}
+.input-name label{
+    font-size: 12px;
+    display: block;
+    
+    /* position: absolute; */
+}
+
+.input-name input{
+    display: block;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+}
+
+.input-email{
+    /* border: 1px solid black; */
+    margin-bottom: 5px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.input-email label{
+    display: block;
+    font-size: 12px;
+    
+}
+
+.input-email input{
+    display: block;
+    display: block;
+    border: none;
+    
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+
+.input-phone{
+    margin-bottom: 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.input-phone label{
+    display: block;
+    font-size: 12px;
+}
+
+.input-phone input{
+    
+    display: block;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+.method-ship{
+    margin-bottom: 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.method-ship label{
+    display: block;
+    font-size: 12px;
+}
+.method-ship input{
+    display: block;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+.addr-ship{
+    margin-bottom: 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 5px 10px; 
+}
+.addr-ship label{
+    
+    display: block;
+    
+    font-size: 12px;
+}
+.addr-ship input{
+    display: block;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+.step-foot-cart{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 5px;
+}
+.step-foot-cart a{
+    text-decoration: none;
+}
+.tocart{
+    color: #338dbc;
+    font-weight: 500;
+    text-align: center;
+    
+}
+.topymt{
+    color: #ffffff;
+    font-weight: 500;
+}
+.step-foot-cart button{
+    padding: 10px;
+    border-radius: 4px;
+    background: #338dbc;
+    text-align: center;
+    color: #ffffff;
+    border: transparent;
+}
+/* san pham */
+.view-cart-container{
+   border-left: 1px solid #e5e5e5 ;
+   
+}
+.viewtocart {
+    padding: 30px;
+    border-bottom: 1px solid #e5e5e5;
+    
+}
+.viewtocart td{
+    padding: 10px;
+}
+
+.pro-img-cart{
+    text-align: center;
+    ;
+    
+}
+.pro-img-cart img{
+    width: 64px;
+    height: 64px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.pro-info-cart{
+    font-size: 14px;
+}
+.pro-price-cart{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.voucher{
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e5e5;
+}
+.voucher-content{
+    margin-bottom: 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 10px 10px; 
+    height: 60px;
+    width: 80%;
+     
+}
+.voucher-content label{
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+}
+.voucher-content input{
+    display: block;
+    border: none;
+    outline: none;
+    width: 100%;
+    
+}
+.voucher button{
+    border-radius: 10px;
+    width: 50px;
+    color: #ffffff;
+    font-weight: 500;
+    background-color: #c8c8c8;
+    border: 1px solid #c8c8c8;
+    width: 18%;
+    height: 60px;
+}
+.voucher button:hover{
+    background: #000000;
+    color: #ffffff;
+}
+.after-total{
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+.after-total h3{
+    font-size: 20px;
+}
+
+.after-total span{
+    font-size: 25px;
+    
+}
+/* Thanh toán 2 */
+.content-box-pm{
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.cash-pm{
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 10px;
+    font-weight: 500;
+    margin: 10px;
+}
+.cash-pm p{
+    margin-top: 5px;
+}
+
+.bank-pm{
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 10px;
+    font-weight: 500;
+    margin: 10px;
+    
+}
+.bank-pm p{
+    margin-top: 5px;
+}
+
+
+
+@media (max-width: 991px) {
+    
+}
+@media (max-width: 768px) {
+    html{
+        font-size: 90%;
+    }
+    
+}

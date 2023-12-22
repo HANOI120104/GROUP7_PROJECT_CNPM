@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand' ;
+}
+.product-list{
+    display: flex;
+    justify-content: center;
+    /* padding: 0; */
+    /* border: 1px solid black; */
+    margin-left: 0px;
+    width: 100%;
+}
+.product{
+    margin-right: 25px;
+    padding: 0px;
+    margin-bottom: 60px;
+    margin-top: 50px;
+    width: 195px !important;
+    height: auto;
+    
+    
+}
+.product_block{
+    max-width: 195px;
+    /* border: 1px solid blue; */
+    width: 195px;
+    height: auto;
+    margin-right: 0;
+    
+
+}
+.product-img{
+    /* border: 1px solid green; */
+    width: 195px;
+    height: 195px;
+    position: relative;
+}
+.product-img a{
+    width: 100%;
+    height: auto;
+    
+}
+.pt1{
+    transition: 0.5s ease;
+}
+.pt2{
+    display: none;
+}
+.product:hover .pt2{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 195px;
+    top: 0px;
+    border: 0.05px solid #e5e5e5;
+    
+}
+.product-img img{
+    width: 195px;
+    height: 195px;
+    object-fit: cover;
+}
+.button-add button{
+    display: none;
+    width: 45%;
+    height: 25px;
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: #191919;
+    color: #fff;
+}
+.product:hover .tobuy{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    
+}
+.product:hover .tocart{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    
+}
+.product-detail{
+    /* border: 1px solid red; */
+    width: 100%;
+   
+}
+.pro-name a{
+    color: #191919;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+    text-decoration: none;
+}
+.pro-price p{
+    text-align: center;
+    font-weight: 600;
+    color: #f94c43;
+}
