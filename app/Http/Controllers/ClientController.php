@@ -440,4 +440,53 @@ class ClientController extends Controller
             session()->flash('success', 'Thêm vào giỏ hàng thành công');
             return redirect()->route('show.cart');
         }
+        public function removeFromCart($id)
+        {
+            \Cart::remove($id);
+            return redirect()->route('show.cart')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
+        }
+        public function changeQuantity(Request $request)
+        {
+            $itemId = $request->item_id;
+            $action = $request->action;
+
+            // Lấy mục cần thay đổi số lượng từ giỏ hàng
+            $cartItem = \Cart::get($itemId);
+
+            if ($cartItem) {
+                $currentQuantity = $cartItem->quantity;
+
+
+                if ($action === 'add') {
+                    $newQuantity = $currentQuantity + 1;
+                } elseif ($action === 'drop' && $currentQuantity > 1) {
+                    $newQuantity = $currentQuantity - 1;
+                } else {
+                    \Cart::remove($itemId);
+                    return redirect()->route('show.cart');
+                }
+
+
+                \Cart::remove($itemId);
+
+
+                \Cart::add([
+                    'id' => $cartItem->id,
+                    'name' => $cartItem->name,
+                    'price' => $cartItem->price,
+                    'quantity' => $newQuantity,
+                    'attributes' => [
+                        'url' => $cartItem->attributes->url,
+                        'size' => $cartItem->attributes->size,
+                    ],
+                ]);
+            }
+
+            return redirect()->route('show.cart');
+        }
+        public function showThanhtoan(){
+            $cartItems = \Cart::getContent();
+            $customer = Auth::guard('customer')->user();
+            return view('client_view/thanhtoan',compact('cartItems','customer'));
+        }
 }
