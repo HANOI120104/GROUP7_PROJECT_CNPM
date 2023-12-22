@@ -37,7 +37,7 @@ Route::post('/search', [ClientController::class, 'search'])->name('product.searc
 Route::get('/cart', [ClientController::class, 'showCart'])->name('show.cart');
 Route::post('/remove-cart/{id}', [ClientController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/change-quantity', [ClientController::class, 'changeQuantity'])->name('change.quantity');
-
+Route::delete('/clientdeleteorder/{id}', [ClientController::class, 'deleteOrder'])->name('client.delete.order');
 
 
 Route::get('/thanhtoan', [ClientController::class, 'showThanhtoan'])->middleware('customer.auth')->name('show.thanhtoan');
