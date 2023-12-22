@@ -425,4 +425,19 @@ class ClientController extends Controller
             }
             return view('client_view/cart',compact('cartItems','productsWithImages'));
         }
+        public function addToCart(Request $request){
+
+            \Cart::add([
+                'id' => $request->id,
+                'name' => $request->ProductName,
+                'price' => $request->Price,
+                'quantity' => $request->quantity,
+                'attributes' => [
+                    'url' => $request->URL,
+                    'size' => $request->size,
+                ],
+            ]);
+            session()->flash('success', 'Thêm vào giỏ hàng thành công');
+            return redirect()->route('show.cart');
+        }
 }

@@ -43,3 +43,5 @@ Route::post('/change-quantity', [ClientController::class, 'changeQuantity'])->na
 Route::get('/thanhtoan', [ClientController::class, 'showThanhtoan'])->middleware('customer.auth')->name('show.thanhtoan');
 Route::post('/thanhtoan', [ClientController::class, 'thanhtoan'])->name('thanhtoan');
 
+Route::post('/add-to-cart', [ClientController::class, 'addToCart'])->name('add.to.cart');
+Route::post('/buynow', [ClientController::class, 'buynow'])->name('buy.now');
