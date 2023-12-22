@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <span><i class="fa-solid fa-envelope"></i></span><p><a
-                         href="mailto:abc@email.me">eProjectG2@email.me</a></p>
+                         href="mailto:abc@email.me">nhom7CNPM@email.com</a></p>
                     </li>
                 </ul>
             </div>

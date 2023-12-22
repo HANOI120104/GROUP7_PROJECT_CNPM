@@ -49,7 +49,7 @@
                     <h3>THÔNG TIN LIÊN HỆ</h3>
                 </div>
                 <div>
-                    <p><span class="bold-content">Email</span>: eProjectG2@email.me</p>
+                    <p><span class="bold-content">Email</span>: nhom7CNPM@email.com</p>
                     <p><span class="bold-content">Số điện thoại</span>: 0865380226</p>
                     <p><span class="bold-content">Địa chỉ</span>: 175 Tây sơn Đống Đa Hà Nội</p>
                     <div>

@@ -525,7 +525,6 @@ class ClientController extends Controller
                 $oder_detail->Product_id = $item->id;
                 $oder_detail->price = $item->price;
                 $oder_detail->SizeName = $item->attributes->size;
-                $oder_detail->TotalPrice = $item->quantity * $item->price ;
                 $oder_detail->save();
                 
                 $quantity_to_subtract = $item->quantity;
