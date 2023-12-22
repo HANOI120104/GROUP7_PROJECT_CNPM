@@ -146,6 +146,7 @@ class ClientController extends Controller
     }
     public function HomePage()
     {
+    
         // Lấy danh sách sản phẩm từ bảng "Product"
         $sneakers = Product::where('category_id', 1)
                             ->whereHas('sizes', function ($query) {
@@ -488,5 +489,61 @@ class ClientController extends Controller
             $cartItems = \Cart::getContent();
             $customer = Auth::guard('customer')->user();
             return view('client_view/thanhtoan',compact('cartItems','customer'));
+        }
+        public function thanhtoan(Request $request){
+            $messages = [
+                'fullname.required' => 'Vui lòng nhập họ tên.',
+                'address.required' => 'Vui lòng nhập địa chỉ.',
+                'phone.required' => 'Vui lòng nhập số điện thoại.',
+                'phone.max' => 'Số điện thoại không được vượt quá :10 ký tự.',
+                'email.required' => 'Vui lòng nhập địa chỉ email.',
+                'email.email' => 'Địa chỉ email không hợp lệ.',
+            ];
+            
+            $validatedData = $request->validate([
+                'fullname' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'phone' => 'required|string|max:10',
+                'email' => 'required|email|max:255',
+            ], $messages);
+            $thanhtoan = new order;
+            $thanhtoan->fullname = $request->fullname;
+            $thanhtoan->address = $request->address;
+            $thanhtoan->phone = $request->phone;
+            $thanhtoan->email = $request->email;
+            $thanhtoan->Total = $request->Total;
+            $thanhtoan->customer_id = $request->customer_id;
+            $thanhtoan->status = 0;
+            $thanhtoan->save();
+    
+            $cartItems = \Cart::getContent();
+            foreach($cartItems as $item){
+                $oder_detail = new order_detail;
+                $oder_detail->order_id = $thanhtoan->id;
+                $oder_detail->quantity = $item->quantity;
+                $oder_detail->ProductName = $item->name;
+                $oder_detail->Product_id = $item->id;
+                $oder_detail->price = $item->price;
+                $oder_detail->SizeName = $item->attributes->size;
+                $oder_detail->TotalPrice = $item->quantity * $item->price ;
+                $oder_detail->save();
+                
+                $quantity_to_subtract = $item->quantity;
+
+                $size = Size::where('product_id', $item->id)
+                    ->where('SizeName', $item->attributes->size)
+                    ->first();
+
+                if ($size) {
+                    $new_quantity = max($size->Quantity - $quantity_to_subtract, 0);
+                    $size->Quantity = $new_quantity;
+                    $size->save();
+                }
+            }
+            Mail::to($request->email)->send(new SendMail());
+            \Cart::clear();
+            return redirect()->route('customer.info');
+    
+    
         }
 }

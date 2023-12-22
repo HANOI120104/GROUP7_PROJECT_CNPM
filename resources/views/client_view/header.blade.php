@@ -70,7 +70,7 @@
                             </div>
                             <div class="action--cart col-3">
                                 <a href="{{route('show.cart')}}" >
-                                    <i class="fa-solid fa-cart-plus"><span class="count">({{ Cart::getTotalQuantity() }})</span></i>
+                                    <i class="fa-solid fa-cart-plus"><span class="count">({{ \Cart::getTotalQuantity() }})</span></i>
                                 </a>
                             </div>
                             <div class="action--nav col-3">
