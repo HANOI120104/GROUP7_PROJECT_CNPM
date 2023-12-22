@@ -34,3 +34,12 @@ Route::get('/product-detail',[ClientController::class, 'detailProduct'])->name('
 Route::get('/search', [ClientController::class, 'search'])->name('product.search.result');
 Route::post('/search', [ClientController::class, 'search'])->name('product.search');
 
+Route::get('/cart', [ClientController::class, 'showCart'])->name('show.cart');
+Route::post('/remove-cart/{id}', [ClientController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/change-quantity', [ClientController::class, 'changeQuantity'])->name('change.quantity');
+
+
+
+Route::get('/thanhtoan', [ClientController::class, 'showThanhtoan'])->middleware('customer.auth')->name('show.thanhtoan');
+Route::post('/thanhtoan', [ClientController::class, 'thanhtoan'])->name('thanhtoan');
+

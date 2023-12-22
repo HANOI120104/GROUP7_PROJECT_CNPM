@@ -73,7 +73,7 @@
                                 <td>Đang giao hàng</td>
                                 @endif
                                 <td>
-                                <form action="" method="POST" onsubmit="return ConfirmDelete( this )">
+                                <form action="{{ route('client.delete.order', $item->id) }}" method="POST" onsubmit="return ConfirmDelete( this )">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn-cancel">Hủy đơn</button>

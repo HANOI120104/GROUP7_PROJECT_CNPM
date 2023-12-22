@@ -392,4 +392,37 @@ class ClientController extends Controller
             }
             return view('client_view/search', compact('productsWithImages','count','keyword'));
         }
+        public function deleteOrder($id){
+            $order = Order::find($id);
+            $order_detail = Order_detail::where('order_id',$id);
+            $order_detail->delete();
+            $order->delete();
+            return redirect()->back();
+        }
+        public function showCart(){
+            
+            $cartItems = \Cart::getContent();
+            $otherProducts =Product::where('ProductStatus', 1)
+            ->whereHas('sizes', function ($query) {
+                $query->where('Quantity', '>', 0);
+            })
+            ->inRandomOrder()
+            ->take(8)
+            ->get();
+            $productsWithImages = [];
+            foreach ($otherProducts as $otherProduct) {
+                $images1 = Image::where('product_id', $otherProduct->id)
+                                ->take(2)
+                                ->pluck('url');
+                $size = Size::where('product_id', $otherProduct->id)->pluck('SizeName')->first();
+                $productData = [
+                    'size' => $size, 
+                    'otherProduct' => $otherProduct,
+                    'image1' => $images1[0],
+                    'image2' => $images1[1],
+                ];
+                $productsWithImages[] = $productData;
+            }
+            return view('client_view/cart',compact('cartItems','productsWithImages'));
+        }
 }
