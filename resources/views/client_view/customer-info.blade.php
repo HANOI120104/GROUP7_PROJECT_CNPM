@@ -72,6 +72,8 @@
                                 @else
                                 <td>Đang giao hàng</td>
                                 @endif
+                                
+                                @if($item->Status == 0)
                                 <td>
                                 <form action="{{ route('client.delete.order', $item->id) }}" method="POST" onsubmit="return ConfirmDelete( this )">
                                         @csrf
@@ -79,6 +81,9 @@
                                         <button class="btn-cancel">Hủy đơn</button>
                                     </form>
                                 </td>
+                               
+                                @endif
+                                
                             </tr>
                             @endforeach
                         </tbody>

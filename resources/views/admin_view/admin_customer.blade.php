@@ -38,7 +38,7 @@
                             <th>Name</th>
                             <th>Email</th>
                            
-                            <th></th>
+                            
                             <th></th>
 
                         </tr>
@@ -51,11 +51,7 @@
                             <td>{{$customer->name}}</td>
                             <td>{{$customer->email}}</td>
                             
-                            <td>
-                                <a href="{{route('edit.customer',$customer->id )}}">
-                                    <button class="btn-edit">Sửa</button>
-                                </a>
-                            </td>
+                            
                             <td>
                             <form action="{{ route('delete.customer', $customer->id) }}" method="POST" onsubmit="return ConfirmDelete( this )">
                                 @csrf

@@ -65,24 +65,7 @@
                                             </select>
                                         </div>
                                         @endif
-                                        @error('password')
-                                        <div class="notify-register">
-                                            <p style ="color: red;">{{$message}}</p>
-                                        </div>
-                                        @enderror
-                                        <div class="input-box">
-                                            <span class="details">Mật khẩu</span>
-                                            <input type="password"  name="password">
-                                        </div>
-                                        @error('password_confirmation')
-                                        <div class="notify-register">
-                                            <p style ="color: red;">{{$message}}</p>
-                                        </div>
-                                        @enderror
-                                        <div class="input-box">
-                                            <span class="details">Nhập lại mật khẩu</span>
-                                            <input type="password"  name="password_confirmation">
-                                        </div>
+                                        
                                     </div>
                                     <div class="button">
                                         <input type="submit" value="Cập nhập">

@@ -56,7 +56,7 @@
                                     <td>{{$item->SizeName}}</td>
                                     <td>{{$item->Price}}đ</td>
                                     <td>{{$item->Quantity}}</td>
-                                    <td>{{number_format($item->TotalPrice)}}đ</td>
+                                    <td>{{number_format($item->Price * $item->Quantity)}}đ</td>
                                 </tr>
                                 @endforeach
                             </tbody>
